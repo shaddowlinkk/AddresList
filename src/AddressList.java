@@ -84,7 +84,7 @@ public class AddressList
 
     }
 
-    public String reverstoString() {
+    public String reversToString() {
         Stack<String> set = new Stack<String>();
         if (!current.hasNext()) {
             current = front;
@@ -97,7 +97,7 @@ public class AddressList
         } else {
             set.push(cat + current.getName() + current.getAddr() + current.getTel() + current.getEmail() + current.getDob() + "\n");
             current = current.getNext();
-            return reverstoString();
+            return reversToString();
         }
 
     }
