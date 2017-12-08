@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class AddressList
 {
     /**
@@ -41,7 +43,7 @@ public class AddressList
     public ListNode front =null;
     private ListNode current = front;
     private String cat="";
-    private int vale;
+    private int size=0;
     public AddressList (String name, String tel, String email, String address, String dob){
 
     }
@@ -54,10 +56,6 @@ public class AddressList
         }
     }
 
-    /**
-     *
-     * @return String of data in list.
-     */
     public String toString() {
         if (!current.hasNext()) {
             current = front;
@@ -65,16 +63,76 @@ public class AddressList
             cat = "";
             return temp;
         } else {
-            cat += cat + current.getName() + current.getAddr() + current.getTel() + current.getEmail() + current.getDob() + "\n";
+            cat +=  current.getName() + current.getAddr() + current.getTel() + current.getEmail() + current.getDob() + "\n";
             current = current.getNext();
-            toString();
+            return toString();
         }
-        return null;
-    }
-    public int sizeOf(){
-        if (current.hasNext())
 
     }
+
+    public int sizeOf(){
+        if (!current.hasNext()){
+            current= front;
+            int temp = size;
+            size=0;
+            return temp;
+        }else {
+            size++;
+            current=current.getNext();
+            return sizeOf();
+        }
+
+    }
+
+    public String reverstoString() {
+        Stack<String> set = new Stack<String>();
+        if (!current.hasNext()) {
+            current = front;
+            while (!set.empty()){
+                cat+=set.pop();
+            }
+            String temp = cat;
+            cat = "";
+            return temp;
+        } else {
+            set.push(cat + current.getName() + current.getAddr() + current.getTel() + current.getEmail() + current.getDob() + "\n");
+            current = current.getNext();
+            return reverstoString();
+        }
+
+    }
+
+    public String phoneNumberByName(String _name){
+        if(!current.hasNext()||current.getName()==_name){
+            return current.getTel();
+        }else{
+            return phoneNumberByName(_name);
+        }
+    }
+
+    public String emailByName(String _name){
+        if(!current.hasNext()||current.getName()==_name){
+            return current.getEmail();
+        }else{
+            return emailByName(_name);
+        }
+    }
+
+    public String dobByName(String _name){
+        if(!current.hasNext()||current.getName()==_name){
+            return current.getDob();
+        }else{
+            return dobByName(_name);
+        }
+    }
+
+    public String nameByPhoneNumber(String _Tel){
+    if(!current.hasNext()||current.getTel()==_Tel){
+        return current.getDob();
+    }else{
+        return nameByPhoneNumber(_Tel);
+    }
+}
 
 //======================================
 } // end of class AddressList
