@@ -83,13 +83,13 @@ public class AddressList
     public String toString() {
         if(front!=null) {
             if (current.getNext() == null) {
-                cat += current.getName() + current.getAddr() + current.getTel() + current.getEmail() + current.getDob() + "\n";
+                cat += current.getName()+"," + current.getAddr()+"," + current.getTel()+"," + current.getEmail()+"," + current.getDob() + "\n";
                 current = front;
                 String temp = cat;
                 cat = "";
                 return temp;
             } else {
-                cat += current.getName() + current.getAddr() + current.getTel() + current.getEmail() + current.getDob() + "\n";
+                cat += current.getName()+"," + current.getAddr()+"," + current.getTel() +","+ current.getEmail()+"," + current.getDob() + "\n";
                 current = current.getNext();
                 return toString();
             }
@@ -121,7 +121,7 @@ public class AddressList
     public String reversToString() {
         if(front!=null) {
             if (!current.hasNext()) {
-                set.push(cat + current.getName() + current.getAddr() + current.getTel() + current.getEmail() + current.getDob() + "\n");
+                set.push(cat + current.getName()+"," + current.getAddr()+"," + current.getTel()+"," + current.getEmail()+"," + current.getDob() + "\n");
                 current = front;
                 while (!set.empty()) {
                     cat += set.pop();
@@ -130,7 +130,7 @@ public class AddressList
                 cat = "";
                 return temp;
             } else {
-                set.push(cat + current.getName() + current.getAddr() + current.getTel() + current.getEmail() + current.getDob() + "\n");
+                set.push(cat + current.getName() +","+ current.getAddr()+"," + current.getTel()+"," + current.getEmail()+"," + current.getDob() + "\n");
                 current = current.getNext();
                 return reversToString();
             }
@@ -145,7 +145,11 @@ public class AddressList
             if (!current.hasNext() || current.getName() == _name) {
                 String temp = current.getTel();
                 current = front;
-                return (!current.hasNext()&&!(current.getName() == _name)) ? null : temp;
+                if((!current.hasNext()&&!(current.getName() == _name))) {
+                    return temp;
+                }else {
+                    return "bug";
+                }
             } else {
                 return phoneNumberByName(_name);
             }
@@ -159,7 +163,11 @@ public class AddressList
             if (!current.hasNext() || current.getName() == _name) {
                 String temp = current.getEmail();
                 current = front;
-                return (!current.hasNext()&&!(current.getName() == _name)) ? null : temp;
+                if((!current.hasNext()&&!(current.getName() == _name))) {
+                    return temp;
+                }else {
+                    return "bug";
+                }
             } else {
                 current = current.getNext();
                 return emailByName(_name);
@@ -174,7 +182,11 @@ public class AddressList
             if (!current.hasNext() || current.getName() == _name) {
                 String temp = current.getDob();
                 current = front;
-                return (!current.hasNext()&&!(current.getName() == _name)) ? null : temp;
+                if((!current.hasNext()&&!(current.getName() == _name))) {
+                    return temp;
+                }else {
+                    return "bug";
+                }
 
             } else {
                 current = current.getNext();
@@ -190,7 +202,11 @@ public class AddressList
             if (!current.hasNext() || current.getTel() == _Tel) {
                 String temp = current.getName();
                 current = front;
-                return (!current.hasNext()&&!( current.getTel() == _Tel)) ? null : temp;
+                if(!current.hasNext()&&!( current.getTel() == _Tel)) {
+                    return temp;
+                }else {
+                    return "bug";
+                }
             } else {
                 current = current.getNext();
                 return nameByPhoneNumber(_Tel);

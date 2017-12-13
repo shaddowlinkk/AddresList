@@ -64,6 +64,7 @@ public class ListGUI {
         reverseToStringButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println(list.reversToString());
                 output.setText(list.reversToString());
             }
         });
@@ -83,6 +84,10 @@ public class ListGUI {
         phoneNumberByNameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println(list.phoneNumberByName(name.getText()));
+                output.setText(list.phoneNumberByName(name.getText()));
+                System.out.println(list.toString());
+                name.setText("");
 
             }
         });
