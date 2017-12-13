@@ -41,7 +41,6 @@ public class AddressList
     } // end of class ListNode
 // =====================================
     public ListNode front=null;
-
     private ListNode current = front;
     private Stack<String> set = new Stack<String>();
     private String cat="";
@@ -82,7 +81,7 @@ public class AddressList
     }
 
     public String toString() {
-        if (front==null) {
+        if(front!=null) {
             if (current.getNext() == null) {
                 cat += current.getName() + current.getAddr() + current.getTel() + current.getEmail() + current.getDob() + "\n";
                 current = front;
@@ -94,115 +93,135 @@ public class AddressList
                 current = current.getNext();
                 return toString();
             }
-        }else {
-            return null;
-        }
 
+        }else {
+            return "List is empty";
+        }
     }
 
     public int sizeOf(){
-        if (front==null){
-            return 0;
-        }
-        if (current.getNext()==null){
-            size++;
-            current= front;
-            int temp = size;
-            size=0;
-            return temp;
+        if(front!=null) {
+            if (current.getNext() == null) {
+                size++;
+                current = front;
+                int temp = size;
+                size = 0;
+                return temp;
+            } else {
+                size++;
+                current = current.getNext();
+                return sizeOf();
+            }
         }else {
-            size++;
-            current=current.getNext();
-            return sizeOf();
+            return -1;
         }
 
     }
 
     public String reversToString() {
-        if (!current.hasNext())
-        {
-            set.push(cat + current.getName() + current.getAddr() + current.getTel() + current.getEmail() + current.getDob() + "\n");
-            current = front;
-            while (!set.empty()){
-                cat+=set.pop();
+        if(front!=null) {
+            if (!current.hasNext()) {
+                set.push(cat + current.getName() + current.getAddr() + current.getTel() + current.getEmail() + current.getDob() + "\n");
+                current = front;
+                while (!set.empty()) {
+                    cat += set.pop();
+                }
+                String temp = cat;
+                cat = "";
+                return temp;
+            } else {
+                set.push(cat + current.getName() + current.getAddr() + current.getTel() + current.getEmail() + current.getDob() + "\n");
+                current = current.getNext();
+                return reversToString();
             }
-            String temp = cat;
-            cat = "";
-            return temp;
-        } else {
-            set.push(cat + current.getName() + current.getAddr() + current.getTel() + current.getEmail() + current.getDob() + "\n");
-            current = current.getNext();
-            return reversToString();
+        }else {
+            return "list is empty";
         }
 
     }
 
     public String phoneNumberByName(String _name){
-        if(!current.hasNext()||current.getName()==_name){
-            String temp=current.getTel();
-            current=front;
-            return (!current.hasNext())?null:temp;
-        }else{
-            return phoneNumberByName(_name);
+        if(front!=null) {
+            if (!current.hasNext() || current.getName() == _name) {
+                String temp = current.getTel();
+                current = front;
+                return (!current.hasNext()&&!(current.getName() == _name)) ? null : temp;
+            } else {
+                return phoneNumberByName(_name);
+            }
+        }else {
+            return "list is empty";
         }
     }
 
     public String emailByName(String _name){
-        if(!current.hasNext()||current.getName()==_name){
-            String temp=current.getEmail();
-            current=front;
-            return (!current.hasNext())?null:temp;
-        }else{
-            current=current.getNext();
-            return emailByName(_name);
+        if(front!=null) {
+            if (!current.hasNext() || current.getName() == _name) {
+                String temp = current.getEmail();
+                current = front;
+                return (!current.hasNext()&&!(current.getName() == _name)) ? null : temp;
+            } else {
+                current = current.getNext();
+                return emailByName(_name);
+            }
+        }else {
+            return "list is empty";
         }
     }
 
     public String dobByName(String _name){
-        if(!current.hasNext()||current.getName()==_name){
-            String temp=current.getDob();
-            current=front;
-            return (!current.hasNext())?null:temp;
+        if(front!=null) {
+            if (!current.hasNext() || current.getName() == _name) {
+                String temp = current.getDob();
+                current = front;
+                return (!current.hasNext()&&!(current.getName() == _name)) ? null : temp;
 
-        }else{
-            current=current.getNext();
-            return dobByName(_name);
+            } else {
+                current = current.getNext();
+                return dobByName(_name);
+            }
+        }else {
+            return "list is empty";
         }
     }
 
     public String nameByPhoneNumber(String _Tel){
-    if(!current.hasNext()||current.getTel()==_Tel){
-        String temp=current.getName();
-        current=front;
-        return (!current.hasNext())?null:temp;
-    }else{
-        current=current.getNext();
-        return nameByPhoneNumber(_Tel);
-    }
+        if(front!=null) {
+            if (!current.hasNext() || current.getTel() == _Tel) {
+                String temp = current.getName();
+                current = front;
+                return (!current.hasNext()&&!( current.getTel() == _Tel)) ? null : temp;
+            } else {
+                current = current.getNext();
+                return nameByPhoneNumber(_Tel);
+            }
+        }else {
+            return "list is empty";
+        }
 }
 public void revers(){
-        if (front!=null) {
-            ListNode temp2 = null;
-            if (current.getNext() != null) {
-                temp2 = new ListNode(current.name, current.tel, current.email, current.addr, current.dob);
-                current = current.getNext();
-                revers();
-            } else {
-                temp2 = new ListNode(current.name, current.tel, current.email, current.addr, current.dob);
-            }
-            if (temp == null) {
-                temp = temp2;
-                newcurent = temp;
-            } else {
-                while (newcurent.getNext() != null) {
-                    newcurent = newcurent.getNext();
-                }
-                newcurent.setNext(temp2);
-                newcurent = temp;
-            }
-            front = temp;
-            current = front;
+    if(front!=null) {
+        ListNode temp2 = null;
+        if (current.getNext() != null) {
+            temp2 = new ListNode(current.name, current.tel, current.email, current.addr, current.dob);
+            current = current.getNext();
+            revers();
+        } else {
+            temp2 = new ListNode(current.name, current.tel, current.email, current.addr, current.dob);
         }
+        if (temp == null) {
+            temp = temp2;
+            newcurent = temp;
+        } else {
+            while (newcurent.getNext() != null) {
+                newcurent = newcurent.getNext();
+            }
+            newcurent.setNext(temp2);
+            newcurent = temp;
+        }
+        front = temp;
+        current = front;
+    }
 }
 
 //======================================
